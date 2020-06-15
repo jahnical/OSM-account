@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <title>OSM Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="sign.css">
+            <meta charset="UTF-8">
+    </head>
+    <body>
+        <header>
+            <h1>Malawi Online Shopping</h1>
+        </header>
+        <section id="sec1">
+        </section>
+        <aside id="exText"></aside>
+        <footer>
+            Online Shopping Malawi<br>
+            <br />
+            Linked Shops:
+            <ul>
+                <li>Shopprite</li>
+                <li>Sana</li>
+                <li>Chipiku</li>
+                <li>Peoples</li>
+                <li>Game Stores</li>
+            </ul>
+            <div id="co">&copy;2020 NETHARD</div>
+        </footer>
+        
+        <div id="onloading"></div>
+        <script>
+            var pass;
+            var email;
+            var loginP = "<div id='container' style='animation:transD 2s'>" +
+    "<div id='failed'>The email or password is incorrect!</div>"+
+            "<h3>Sign In</h3>" +
+            "<form name='login' method='post' target='_self' action=' '  onsubmit='validate()'>" +
+                "<div class='inp'><div id='forEmail'>Invalid Email</div><input type='email' id='email' placeholder='Email address'></div>" +
+                "<div class='inp'><div id='forPass'>Enter password</div><input type='password' id='pass' placeholder='Password'></div>" +
+                "<div class='button' id='singleB' onclick='processLogin()'><div id='loading'></div>Log in</div>" +
+                "<div class='' id='fpass' onclick='handleFPass()'>Forgot password?</div>" +
+            "</form> </div>";
+            //Display validation message
+                function vMessage(id) {
+                    let d = document.getElementById(id);
+                    d.style.display = "block";
+                     setTimeout(() => {
+                         d.style.display = "none"
+                      }, 8000);
+                }
+
+
+//Handling log in
+const processLogin = () => {
+    var addressEle = document.getElementById("email");
+    if (addressEle == undefined) {
+        document.getElementById("sec1").innerHTML = "<div id='container'>" +
+            "<h3>Sign In</h3>" +
+            "<form name='login' method='post' target='_self' action=' '  onsubmit='validate()'>" +
+                "<div class='inp'><div id='forEmail'>Invalid Email</div><input type='email' id='email' placeholder='Email address'></div>" +
+                "<div class='inp'><div id='forPass'>Enter Password</div><input type='password' id='pass' placeholder='Password'></div>" +
+                "<div class='button' id='singleB' onclick='processLogin()'><div id='loading'></div>Log in</div>" +
+            "</form> </div>";
+        document.getElementById("exText").innerHTML = "I don't have an account. <a href='signup.html'>Sign Up.</a>"
+    }
+    else {
+    email = addressEle.value;
+    var passEle = document.getElementById("pass");
+    pass = passEle.value;
+    //Check the email address
+    if (email == "" || / /.test(email) || !/@/.test(email) || !/./.test(email)) {
+        vMessage("forEmail")
+    }
+
+    //Check the password
+    else if (pass == "" ) {
+        vMessage("forPass")
+    }
+    
+    //Send data to server
+    else {
+        document.getElementsByClassName("button")[0].style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+        document.getElementsByClassName("button")[0].style.color = "rgba(255, 255, 255, 0.5)";
+        document.getElementById("loading").style.display = "block";
+
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = () => {
+        	console.log(xhttp.readyState);
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+            	console.log("response received");
+                console.log(xhttp.responseText);
+                login(xhttp.response);
+            }
+            else if (xhttp.status > 400) {
+                document.getElementsByTagName("html")[0].innerHTML = "<h1 style='width: 100%; text-align: center;'>CONNECTION ERROR.<br><a href='signin.html'>RETRY.</a></h1>"
+                console.log(xhttp.status + xhttp.responseText);
+            }
+        }
+        xhttp.open("POST", "login.php?", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("user="+JSON.stringify({email: email, password: pass}));
+    }
+    }
+}
+const login = (res) => {
+    console.log(res)
+    let obj = JSON.parse(res);
+    console.log(obj);
+    if (obj.isMember == true) {
+        //Take the customer in
+        window.location.href = "../index.php";
+    }
+    else {
+        
+             document.getElementById('sec1').innerHTML = loginP;
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("email").value = email; 
+            document.getElementById("pass").value = pass;
+             
+    }
+}
+const handleFPass = () => {
+    
+}
+
+processLogin();
+        </script>
+    </body>
+</html>

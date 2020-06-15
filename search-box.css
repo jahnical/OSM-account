@@ -1,0 +1,195 @@
+*{margin:0; padding: 0;}
+
+aside.search-box-wrapper{
+  display:inline-flex;
+  font-size: 20px;
+ 
+  
+  margin-left: 900px;
+  margin-bottom: 50px;
+  padding-bottom: 100px;
+  
+  
+}
+.input{
+font-size: inherit;
+border: 0.2cm solid lightblue;
+border-radius: 0.5cm 0 0 0.5cm;
+padding: 0.2cm 0.5cm;
+outline: 0;
+
+
+}
+.input:hover,.input:focus{
+  border-color:lightblue;
+}
+.button{
+  font-size: inherit;
+border: 0.2cm solid lightblue;
+border-radius: 0 0.5cm 0.5cm 0;
+background-color:lightblue;
+border-left: 0;
+padding: 0 0.7cm;
+color: #fff;
+font-weight: bold;
+outline: 0;
+cursor: pointer;
+}
+.button:hover,.button:focus{
+  border-color: lightblue;
+  background-color:lightblue;
+}
+body{
+    background-color:#499994;
+    margin: 0 auto;
+    width: 100%; 
+    position: relative;
+  
+   
+  }
+  
+  #main-header{
+    color:darkred; font-family:arial;
+    text-align: center;
+    
+    
+    position: relative;
+    margin-left: 50px;
+    margin-right: 200px;
+    top: 5%;
+    
+    bottom: 100%;
+    transform: translate(+5%,-100%);
+    display: block;
+  
+    
+  }
+  h3.header{
+    color:darkred; font-family:arial;
+    text-align: left;
+    margin-left: 0;
+  
+    -ms-text-kashida-space: initial;
+   
+  }
+  .column1of2 {
+    float: left;
+    width: 650px;
+    margin: 10px;
+  
+  } 
+.column2of2 {
+    float: right;
+    width: 300px;
+    height: 500px;
+    margin-right: 30px;
+    margin-bottom: 300px;
+   padding-bottom: 200px;
+   margin-left: 300px;
+   top: 10%;
+   bottom: 250%;
+   transform: translate(-10%,-25%);
+
+ background-color:#499994;
+ border: 2px solid white;
+ 
+ 
+
+} 
+.para{
+  background-image: url("shoprite.jpg");
+  height: 150px;
+  
+  
+}
+  .para2{
+    height: 200px;
+    background-image: url("gamestore.jpeg");
+  }
+  .para3{
+    height: 150px;
+    background-image: url("chipikuH.jpeg");
+  }
+  .para0{
+    height: 150px;
+    background-image: url("people's.jpeg");
+  }
+  .column1of2{
+    
+      width: 220px;
+      border: 4px solid #f7f3f3;
+      padding: 30px;
+      background:skyblue;
+      border: 3px solid #665544;
+      overflow: auto;
+      margin-top: 120px;
+      margin-left: 0px;
+       height: 448px;    
+      top: 50%;
+      
+      bottom: 5%;
+      transform: translate(+5%,-50%);
+      position: relative;
+      font-family: Arial, Helvetica, sans-serif;
+      margin-bottom: 200px;
+         background-image: url("chipiku.jpg"); 
+         display: block;
+  }
+ .paragraph3{
+   color: white;
+ }
+  
+  
+  .main-footer{
+    text-align: center;
+  
+    
+    margin-right: 400px;
+   font-family:Arial, Helvetica, sans-serif;
+    width: auto;
+    display: block;
+  margin-left: 300px;
+    color:black  ;
+    margin-top: 600px;
+  
+
+  }
+  
+  .paragraph1{
+    font-family: Arial, Helvetica, sans-serif;
+    color: darkred;
+    -ms-text-kashida-space: initial;
+
+  }
+  
+  tr{
+    float:right;
+
+
+  }
+  th a{
+    display: block;
+    text-align: center;
+    color: #fff;
+    padding: 14px 16px;
+    text-decoration: none;
+    margin-left: 10px;
+    border-right-style: double;
+    background-color:brown; 
+    border-radius: 20px;
+  }
+
+  td {
+    border: 2px solid black;
+    padding: 10px;
+    background:lightblue;
+    position: relative;
+    margin-left: 500px; 
+}
+
+.paragraph{
+  color: red;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+

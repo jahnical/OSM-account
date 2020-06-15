@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <title>OSM Sign up</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="sign.css">
+            <meta charset="UTF-8">
+    </head>
+    <body>
+        <header>
+            <h1>Malawi Online Shopping</h1>
+        </header>
+        <section id="sec1">
+        </section>
+        <aside id="exText"></aside>
+        <footer>
+            Malawi Online Shopping<br>
+            <br />
+            Linked Shops:
+            <ul>
+                <li>Shopprite</li>
+                <li>Sana</li>
+                <li>Chipiku</li>
+                <li>Peoples</li>
+                <li>Game Stores</li>
+            </ul>
+            <div id="co">&copy;2020 NETHARD</div>
+        </footer>
+        <script>
+            
+    
+const handleSignUp = () => {
+    document.getElementById("sec1").innerHTML = "<div id='container'>" +
+            "<h3>Sign Up</h3>" +
+            "<form name='login' method='post' target='_self' action=' '  onsubmit='validate()'>" +
+            "<div class='inp'><div id='forName'>Enter fullame</div><input type='text' id='name' placeholder='Name'></div>" +
+                "<div class='inp'><div id='forEmail'>Invalid Email</div><input type='email' id='address' placeholder='Email address'></div>" +
+                "<div class='inp'><div id='forPass'>Invalid Password</div><input type='password' id='firstpass' placeholder='Password'><article id='pinfo'>" + 
+                "Password must be atleast 8 characters long and must contain some non-alphabetical characters.</article></div>" +
+                "<div class='inp'><div id='forConfi'>Passwords mismatch</div><input type='password' id='Confpass' placeholder='Confirm password'></div>" +
+                "<div class='button' id='singleB' onclick='signUp()'><div id='loading'></div>Sign me up</div>" +
+            "</form> </div>";
+    document.getElementById("exText").innerHTML = "Already have an account. <a href='signin.html'>Sign In.</a>"
+}
+ //Display validation message
+ function vMessage(id) {
+                    let d = document.getElementById(id);
+                    d.style.display = "block";
+                     setTimeout(() => {
+                         d.style.display = "none"
+                      }, 8000);
+                }
+
+const signUp = () => {
+    let data = document.getElementsByTagName("input");
+    if (data[0].value == "" || data[0].value.split(" ").length < 2) {
+       vMessage("forName");
+    }
+    else if (data[1].value == "" || / /.test(data[1].value) || !/@/.test(data[1].value) || !/./.test(data[1].value)) {
+        vMessage("forEmail");
+    }
+    else if (data[2].value.length < 8 || !(/\W/.test(data[2].value) || /\d/.test(data[2].value))) {
+        vMessage("forPass");
+    }
+    else if (data[2].value != data[3].value) {
+        vMessage("forConfi");
+    }
+    else {
+        document.getElementsByClassName("button")[0].style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+        document.getElementsByClassName("button")[0].style.color = "rgba(255, 255, 255, 0.5)";
+        document.getElementById("loading").style.display = "block";
+
+        let information = JSON.stringify({
+            firstName: data[0].value.split(" ")[0],
+            lastName: data[0].value.split(" ")[1],
+            email: data[1].value,
+            password: data[2].value
+        });
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = () => {
+            console.log(xhttp.responseText)
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                if (xhttp.responseText == "done") {
+                    let body = document.getElementsByTagName("body")[0];
+                    body.innerHTML = "<section><h3>Successfully Registered!</h3> Verification link was sent to "+ data[1].value+" please go to your inbox and verify.</section>";
+                }
+                    
+                else if (xhttp.responseText == "Invalid email format") {
+                    vMessage("forEmail");
+                    document.getElementsByClassName("button")[0].style.backgroundColor = "#27a797";
+                    document.getElementsByClassName("button")[0].style.color = "#eee";
+                    document.getElementById("loading").style.display = "none";
+                    xhttp.close();
+                }
+                else if (xhttp.responseText != "") {
+                    document.getElementsByTagName("html")[0].innerHTML = "<h1 style='color: red'>SIGN UP FAILED<br><a href='signup.html'>RETRY.</a></h1>"
+                }
+            }
+            else if (xhttp.status > 400) {
+                document.getElementsByTagName("html")[0].innerHTML = "<h1 style='color: red'>CONNECTION ERROR.<br><a href='signup.html'>RETRY.</a></h1>";
+            }
+        };
+        xhttp.open("POST", "signup.php?", true);
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.send("info=" + information);
+    }
+}
+handleSignUp();
+        </script>
+    </body>
+</html>
